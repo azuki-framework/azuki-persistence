@@ -188,6 +188,52 @@ public interface Property {
 	 * @param aKey キー
 	 * @return 値
 	 */
+	public Float getFloat(final String aKey);
+
+	/**
+	 * プロパティを取得する。
+	 * <p>
+	 * 値が存在しない、または<code>null</code>の場合、デフォルト値を返す。
+	 * </p>
+	 * 
+	 * @param aKey キー
+	 * @param aDefault デフォルト値
+	 * @return 値
+	 */
+	public Float getFloat(final String aKey, final Float aDefault);
+
+	/**
+	 * プロパティを取得する。
+	 * <p>
+	 * 値が存在しない場合、<code>null</code>を返す。
+	 * </p>
+	 * 
+	 * @param aKey キー
+	 * @return 値
+	 */
+	public Double getDouble(final String aKey);
+
+	/**
+	 * プロパティを取得する。
+	 * <p>
+	 * 値が存在しない、または<code>null</code>の場合、デフォルト値を返す。
+	 * </p>
+	 * 
+	 * @param aKey キー
+	 * @param aDefault デフォルト値
+	 * @return 値
+	 */
+	public Double getDouble(final String aKey, final Double aDefault);
+
+	/**
+	 * プロパティを取得する。
+	 * <p>
+	 * 値が存在しない場合、<code>null</code>を返す。
+	 * </p>
+	 * 
+	 * @param aKey キー
+	 * @return 値
+	 */
 	public Boolean getBoolean(final String aKey);
 
 	/**
@@ -277,6 +323,8 @@ public interface Property {
 				if (null != o) {
 					if (o instanceof Integer) {
 						value = (Integer) o;
+					} else if (o instanceof Long) {
+						value = ((Long) o).intValue();
 					} else if (o instanceof String) {
 						value = Integer.parseInt((String) o);
 					}
@@ -298,8 +346,56 @@ public interface Property {
 				if (null != o) {
 					if (o instanceof Long) {
 						value = (Long) o;
+					} else if (o instanceof Integer) {
+						value = ((Integer) o).longValue();
 					} else if (o instanceof String) {
 						value = Long.parseLong((String) o);
+					}
+				}
+			}
+			return value;
+		}
+
+		@Override
+		public Float getFloat(final String aKey) {
+			return getFloat(aKey, null);
+		}
+
+		@Override
+		public Float getFloat(final String aKey, final Float aDefault) {
+			Float value = aDefault;
+			if (properties.containsKey(aKey)) {
+				Object o = properties.get(aKey);
+				if (null != o) {
+					if (o instanceof Float) {
+						value = (Float) o;
+					} else if (o instanceof Double) {
+						value = ((Double) o).floatValue();
+					} else if (o instanceof String) {
+						value = Float.parseFloat((String) o);
+					}
+				}
+			}
+			return value;
+		}
+
+		@Override
+		public Double getDouble(final String aKey) {
+			return getDouble(aKey, null);
+		}
+
+		@Override
+		public Double getDouble(final String aKey, final Double aDefault) {
+			Double value = aDefault;
+			if (properties.containsKey(aKey)) {
+				Object o = properties.get(aKey);
+				if (null != o) {
+					if (o instanceof Double) {
+						value = (Double) o;
+					} else if (o instanceof Float) {
+						value = ((Float) o).doubleValue();
+					} else if (o instanceof String) {
+						value = Double.parseDouble((String) o);
 					}
 				}
 			}
