@@ -17,7 +17,7 @@
  */
 package org.azkfw.persistence.session;
 
-import org.azkfw.persistence.store.Store;
+import org.azkfw.store.Store;
 
 /**
  * このインターフェースは、セッション機能のサポートを行うためのインターフェースです。
