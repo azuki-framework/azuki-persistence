@@ -29,7 +29,7 @@ public interface DatabaseConnectionSupport {
 	/**
 	 * コネクション情報を設定する。
 	 * 
-	 * @param aConnection コネクション情報
+	 * @param connection コネクション情報
 	 */
-	public void setConnection(final DatabaseConnection aConnection);
+	public void setConnection(final DatabaseConnection connection);
 }

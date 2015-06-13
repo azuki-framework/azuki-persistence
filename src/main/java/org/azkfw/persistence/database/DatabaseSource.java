@@ -39,6 +39,7 @@ import org.azkfw.persistence.database.entity.DatabaseConnectionEntity;
 public final class DatabaseSource {
 
 	public class SimpleConnectionFactory extends BasePoolableObjectFactory<Connection> {
+		
 		/** URI */
 		private String url;
 		/** ユーザ */
@@ -49,14 +50,14 @@ public final class DatabaseSource {
 		/**
 		 * このクラスのインスタンスを生成します。
 		 * 
-		 * @param aUrl データベース接続のためのURL。
-		 * @param aUser データベース接続のためのユーザ名。
-		 * @param aPassword データベース接続のためのパスワード。
+		 * @param url データベース接続のためのURL。
+		 * @param user データベース接続のためのユーザ名。
+		 * @param password データベース接続のためのパスワード。
 		 */
-		public SimpleConnectionFactory(final String aUrl, final String aUser, final String aPassword) {
-			url = aUrl;
-			user = aUser;
-			password = aPassword;
+		public SimpleConnectionFactory(final String url, final String user, final String password) {
+			this.url = url;
+			this.user = user;
+			this.password = password;
 		}
 
 		/**
@@ -69,11 +70,9 @@ public final class DatabaseSource {
 		}
 	}
 
-	/**
-	 * Connection entity
-	 */
+	/** Connection entity */
 	private DatabaseConnectionEntity entity;
-
+	/** Pool */
 	private ObjectPool<Connection> pool;
 
 	/**
@@ -119,11 +118,11 @@ public final class DatabaseSource {
 	/**
 	 * データベース接続設定をロードします。
 	 * 
-	 * @param aEntity 接続設定
+	 * @param entity 接続設定
 	 * @throws ClassNotFoundException データベース接続ドライバが見つからない場合
 	 */
-	private void load(final DatabaseConnectionEntity aEntity) throws ClassNotFoundException {
-		entity = aEntity;
+	private void load(final DatabaseConnectionEntity entity) throws ClassNotFoundException {
+		this.entity = entity;
 		pooling();
 	}
 
@@ -152,14 +151,14 @@ public final class DatabaseSource {
 	/**
 	 * コネクションを取得します。
 	 * 
-	 * @param aPool プールフラグ
+	 * @param poolFlag プールフラグ
 	 * @return コネクション
 	 * @throws SQLException SQL例外が発生した場合
 	 */
-	public DatabaseConnection getConnection(final boolean aPool) throws SQLException {
+	public DatabaseConnection getConnection(final boolean poolFlag) throws SQLException {
 		Connection con = null;
 		try {
-			if (aPool) {
+			if (poolFlag) {
 				con = pool.borrowObject();
 			} else {
 				con = DriverManager.getConnection(entity.getUri(), entity.getUser(), entity.getPassword());
@@ -184,14 +183,14 @@ public final class DatabaseSource {
 	 * コネクションを返却します。
 	 * 
 	 * @param connection コネクション
-	 * @param pool プールフラグ
+	 * @param poolFlag プールフラグ
 	 * @throws SQLException SQL例外が発生した場合
 	 */
-	public void returnConnection(final DatabaseConnection connection, final boolean aPool) throws SQLException {
+	public void returnConnection(final DatabaseConnection connection, final boolean poolFlag) throws SQLException {
 		Connection con = connection.getConnection();
 		try {
 			if (null != con) {
-				if (aPool) {
+				if (poolFlag) {
 					pool.returnObject(con);
 				} else {
 					con.close();

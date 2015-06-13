@@ -53,67 +53,67 @@ public class IniFile implements Profile {
 	/**
 	 * iniファイルを読み込む。
 	 * 
-	 * @param aFile iniファイル
+	 * @param file iniファイル
 	 * @throws IOException IO操作に起因する問題が発生した場合
 	 */
-	public void read(final String aFile) throws IOException {
-		read(aFile, System.getProperty("file.encoding"));
+	public void read(final String file) throws IOException {
+		read(file, System.getProperty("file.encoding"));
 	}
 
 	/**
 	 * iniファイルを読み込む。
 	 * 
-	 * @param aFile iniファイル
+	 * @param file iniファイル
 	 * @throws IOException IO操作に起因する問題が発生した場合
 	 */
-	public void read(final File aFile) throws IOException {
-		read(aFile, System.getProperty("file.encoding"));
+	public void read(final File file) throws IOException {
+		read(file, System.getProperty("file.encoding"));
 	}
 
 	/**
 	 * iniファイルを読み込む。
 	 * 
-	 * @param aFile iniファイル
-	 * @param aCharset 文字コード
+	 * @param file iniファイル
+	 * @param charset 文字コード
 	 * @throws IOException IO操作に起因する問題が発生した場合
 	 */
-	public void read(final String aFile, final String aCharset) throws IOException {
-		read(aFile, Charset.forName(aCharset));
+	public void read(final String file, final String charset) throws IOException {
+		read(file, Charset.forName(charset));
 	}
 
 	/**
 	 * iniファイルを読み込む。
 	 * 
-	 * @param aFile iniファイル
-	 * @param aCharset 文字コード
+	 * @param file iniファイル
+	 * @param charset 文字コード
 	 * @throws IOException IO操作に起因する問題が発生した場合
 	 */
-	public void read(final File aFile, final String aCharset) throws IOException {
-		read(aFile, Charset.forName(aCharset));
+	public void read(final File file, final String charset) throws IOException {
+		read(file, Charset.forName(charset));
 	}
 
 	/**
 	 * iniファイルを読み込む。
 	 * 
-	 * @param aFile iniファイル
-	 * @param aCharset 文字コード
+	 * @param file iniファイル
+	 * @param charset 文字コード
 	 * @throws IOException IO操作に起因する問題が発生した場合
 	 */
-	public void read(final String aFile, final Charset aCharset) throws IOException {
-		read(new File(aFile), aCharset);
+	public void read(final String file, final Charset charset) throws IOException {
+		read(new File(file), charset);
 	}
 
 	/**
 	 * iniファイルを読み込む。
 	 * 
-	 * @param aFile iniファイル
-	 * @param aCharset 文字コード
+	 * @param file iniファイル
+	 * @param charset 文字コード
 	 * @throws IOException IO操作に起因する問題が発生した場合
 	 */
-	public void read(final File aFile, final Charset aCharset) throws IOException {
+	public void read(final File file, final Charset charset) throws IOException {
 		BufferedReader reader = null;
 		try {
-			reader = new BufferedReader(new InputStreamReader(new FileInputStream(aFile), aCharset));
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), charset));
 
 			String section = null;
 			String line = null;
@@ -127,7 +127,6 @@ public class IniFile implements Profile {
 					// section
 					String sec = line.substring(1, line.length() - 1);
 					section = StringUtility.trim(sec);
-					//System.out.println("SECTION : " + section);
 				} else {
 					int index = line.indexOf("=");
 					if (-1 == index) {
@@ -147,7 +146,6 @@ public class IniFile implements Profile {
 								data.put(section, values);
 							}
 							values.put(name, value);
-							//System.out.println(name + " = " + value);
 						}
 					}
 				}
@@ -167,64 +165,64 @@ public class IniFile implements Profile {
 	/**
 	 * iniファイルに書き出す。
 	 * 
-	 * @param aFile iniファイル
+	 * @param file iniファイル
 	 * @throws IOException IO操作に起因する問題が発生した場合
 	 */
-	public void write(final String aFile) throws IOException {
-		write(aFile, System.getProperty("file.encoding"));
+	public void write(final String file) throws IOException {
+		write(file, System.getProperty("file.encoding"));
 	}
 
 	/**
 	 * iniファイルに書き出す。
 	 * 
-	 * @param aFile iniファイル
+	 * @param file iniファイル
 	 * @throws IOException IO操作に起因する問題が発生した場合
 	 */
-	public void write(final File aFile) throws IOException {
-		write(aFile, System.getProperty("file.encoding"));
+	public void write(final File file) throws IOException {
+		write(file, System.getProperty("file.encoding"));
 	}
 
 	/**
 	 * iniファイルに書き出す。
 	 * 
-	 * @param aFile iniファイル
-	 * @param aCharset 文字コード
+	 * @param file iniファイル
+	 * @param charset 文字コード
 	 * @throws IOException IO操作に起因する問題が発生した場合
 	 */
-	public void write(final String aFile, final String aCharset) throws IOException {
-		write(aFile, Charset.forName(aCharset));
+	public void write(final String file, final String charset) throws IOException {
+		write(file, Charset.forName(charset));
 	}
 
 	/**
 	 * iniファイルに書き出す。
 	 * 
-	 * @param aFile iniファイル
-	 * @param aCharset 文字コード
+	 * @param file iniファイル
+	 * @param charset 文字コード
 	 * @throws IOException IO操作に起因する問題が発生した場合
 	 */
-	public void write(final File aFile, final String aCharset) throws IOException {
-		write(aFile, Charset.forName(aCharset));
+	public void write(final File file, final String charset) throws IOException {
+		write(file, Charset.forName(charset));
 	}
 
 	/**
 	 * iniファイルに書き出す。
 	 * 
-	 * @param aFile iniファイル
-	 * @param aCharset 文字コード
+	 * @param file iniファイル
+	 * @param charset 文字コード
 	 * @throws IOException IO操作に起因する問題が発生した場合
 	 */
-	public void write(final String aFile, final Charset aCharset) throws IOException {
-		write(new File(aFile), aCharset);
+	public void write(final String file, final Charset charset) throws IOException {
+		write(new File(file), charset);
 	}
 
 	/**
 	 * iniファイルに書き出す。
 	 * 
-	 * @param aFile iniファイル
-	 * @param aCharset 文字コード
+	 * @param file iniファイル
+	 * @param charset 文字コード
 	 * @throws IOException IO操作に起因する問題が発生した場合
 	 */
-	public void write(final File aFile, final Charset aCharset) throws IOException {
+	public void write(final File file, final Charset charset) throws IOException {
 		String lineSeparator = "\n";
 		try {
 			lineSeparator = System.getProperty("line.separator");
@@ -246,7 +244,7 @@ public class IniFile implements Profile {
 				}
 			}
 
-			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(aFile), aCharset));
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), charset));
 			writer.write(s.toString());
 
 		} finally {
@@ -261,21 +259,21 @@ public class IniFile implements Profile {
 	}
 
 	@Override
-	public String get(final String aSection, final String aName, final String aDefault) {
-		String value = aDefault;
-		if (data.containsKey(aSection)) {
-			Map<String, String> map = data.get(aSection);
-			if (map.containsKey(aName)) {
-				value = map.get(aName);
+	public String get(final String section, final String name, final String def) {
+		String value = def;
+		if (data.containsKey(section)) {
+			Map<String, String> map = data.get(section);
+			if (map.containsKey(name)) {
+				value = map.get(name);
 			}
 		}
 		return value;
 	}
 
 	@Override
-	public Integer get(final String aSection, final String aName, final Integer aDefault) {
-		Integer value = aDefault;
-		String s = get(aSection, aName, (String) null);
+	public Integer get(final String section, final String name, final Integer def) {
+		Integer value = def;
+		String s = get(section, name, (String) null);
 		if (StringUtility.isNotEmpty(s)) {
 			try {
 				value = Integer.parseInt(s);
@@ -287,9 +285,9 @@ public class IniFile implements Profile {
 	}
 
 	@Override
-	public Long get(final String aSection, final String aName, final Long aDefault) {
-		Long value = aDefault;
-		String s = get(aSection, aName, (String) null);
+	public Long get(final String section, final String name, final Long def) {
+		Long value = def;
+		String s = get(section, name, (String) null);
 		if (StringUtility.isNotEmpty(s)) {
 			try {
 				value = Long.parseLong(s);
@@ -301,9 +299,9 @@ public class IniFile implements Profile {
 	}
 
 	@Override
-	public Float get(final String aSection, final String aName, final Float aDefault) {
-		Float value = aDefault;
-		String s = get(aSection, aName, (String) null);
+	public Float get(final String section, final String name, final Float def) {
+		Float value = def;
+		String s = get(section, name, (String) null);
 		if (StringUtility.isNotEmpty(s)) {
 			try {
 				value = Float.parseFloat(s);
@@ -315,9 +313,9 @@ public class IniFile implements Profile {
 	}
 
 	@Override
-	public Double get(final String aSection, final String aName, final Double aDefault) {
-		Double value = aDefault;
-		String s = get(aSection, aName, (String) null);
+	public Double get(final String section, final String name, final Double def) {
+		Double value = def;
+		String s = get(section, name, (String) null);
 		if (StringUtility.isNotEmpty(s)) {
 			try {
 				value = Double.parseDouble(s);
@@ -329,9 +327,9 @@ public class IniFile implements Profile {
 	}
 
 	@Override
-	public Boolean get(final String aSection, final String aName, final Boolean aDefault) {
-		Boolean value = aDefault;
-		String s = get(aSection, aName, (String) null);
+	public Boolean get(final String section, final String name, final Boolean def) {
+		Boolean value = def;
+		String s = get(section, name, (String) null);
 		if (StringUtility.isNotEmpty(s)) {
 			s = s.toLowerCase();
 			if ("true".equals(s) || "on".equals(s) || "1".equals(s)) {
@@ -344,57 +342,57 @@ public class IniFile implements Profile {
 	}
 
 	@Override
-	public void put(final String aSection, final String aName, final String aValue) {
-		String section = StringUtility.trim(aSection);
-		String name = StringUtility.trim(aName);
-		String value = StringUtility.trim(aValue);
+	public void put(final String section, final String name, final String value) {
+		String bufSection = StringUtility.trim(section);
+		String bufName = StringUtility.trim(name);
+		String bufValue = StringUtility.trim(value);
 
 		Map<String, String> map = null;
-		if (data.containsKey(section)) {
-			map = data.get(section);
+		if (data.containsKey(bufSection)) {
+			map = data.get(bufSection);
 		} else {
 			map = new HashMap<String, String>();
-			data.put(section, map);
+			data.put(bufSection, map);
 		}
-		map.put(name, value);
+		map.put(bufName, bufValue);
 	}
 
 	@Override
-	public void put(final String aSection, final String aName, final Integer aValue) {
-		put(aSection, aName, Integer.toString(aValue));
+	public void put(final String section, final String name, final Integer value) {
+		put(section, name, Integer.toString(value));
 	}
 
 	@Override
-	public void put(final String aSection, final String aName, final Long aValue) {
-		put(aSection, aName, Long.toString(aValue));
+	public void put(final String section, final String name, final Long value) {
+		put(section, name, Long.toString(value));
 	}
 
 	@Override
-	public void put(final String aSection, final String aName, final Float aValue) {
-		put(aSection, aName, Float.toString(aValue));
+	public void put(final String section, final String name, final Float value) {
+		put(section, name, Float.toString(value));
 	}
 
 	@Override
-	public void put(final String aSection, final String aName, final Double aValue) {
-		put(aSection, aName, Double.toString(aValue));
+	public void put(final String section, final String name, final Double value) {
+		put(section, name, Double.toString(value));
 	}
 
 	@Override
-	public void put(final String aSection, final String aName, final Boolean aValue) {
-		put(aSection, aName, ((aValue) ? "true" : "false"));
+	public void put(final String section, final String name, final Boolean value) {
+		put(section, name, ((value) ? "true" : "false"));
 	}
 
 	@Override
-	public void remove(final String aSection, final String aName) {
-		if (data.containsKey(aSection)) {
-			Map<String, String> map = data.get(aSection);
-			map.remove(aName);
+	public void remove(final String section, final String name) {
+		if (data.containsKey(section)) {
+			Map<String, String> map = data.get(section);
+			map.remove(name);
 		}
 	}
 
 	@Override
-	public void remove(final String aSection) {
-		data.remove(aSection);
+	public void remove(final String section) {
+		data.remove(section);
 	}
 
 }

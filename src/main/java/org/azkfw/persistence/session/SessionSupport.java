@@ -31,7 +31,7 @@ public interface SessionSupport {
 	/**
 	 * セッションを設定する。
 	 * 
-	 * @param aStore セッション
+	 * @param store セッション
 	 */
-	public void setSession(final Store<String, Object> aStore);
+	public void setSession(final Store<String, Object> store);
 }

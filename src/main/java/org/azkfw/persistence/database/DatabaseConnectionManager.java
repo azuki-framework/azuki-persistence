@@ -67,6 +67,15 @@ public final class DatabaseConnectionManager extends LoggingObject {
 
 	}
 
+	/**
+	 * ロードする。
+	 * @param uri 接続URI
+	 * @param driver ドライバー
+	 * @param user ユーザ
+	 * @param password パスワード
+	 * @throws PersistenceServiceException {@link PersistenceServiceException}
+	 * @throws ClassNotFoundException {@link ClassNotFoundException}
+	 */
 	public static void load(final String uri, final String driver, final String user, final String password) throws PersistenceServiceException,
 			ClassNotFoundException {
 		load(StringUtility.EMPTY, driver, uri, user, password);
